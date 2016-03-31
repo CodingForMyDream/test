@@ -1,8 +1,8 @@
 package com.qun.thread;
 /**
- * shutdownNow和shutdownNow的调用都会使线程池不在接收新的线程
+ * shutdown和shutdownNow的调用都会使线程池不在接收新的线程
  * shutdownNow会通过interrupt中断，sleep和wait阻塞的线程会抛出异常；
- * 
+ * 添加shutdown或者shutdownNow能够使得程序停止，否则程序一直显示执行状态（红点）
  */
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
