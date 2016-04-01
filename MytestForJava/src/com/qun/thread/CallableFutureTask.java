@@ -23,17 +23,28 @@ public class CallableFutureTask {
 		FutureTask<Integer> futuret2 = new FutureTask<Integer>(ft2);
 		
 		/**
+		 * 线程打印结果为0；得出结论：FutureTask(Runnable runnable, V result) 和 submit(Runnable task, T result)
+		 * 具有同样的效果，只定义result的类型，不能接受返回结果
+		 */
+		TaskRun tr = new TaskRun();
+		Integer result = 0;
+		FutureTask<Integer> futuret3 = new FutureTask<Integer>(tr, result);
+		executor.submit(futuret3);
+		executor.shutdown();
+		System.out.println("线程执行结果:" + result);
+		
+		/**
 		 * 1，线程执行cancel后不能调用get获取结果
 		 * 2，cancel param true立刻打断；false允许执行完成
 		 * 3，线程执行完毕后调用cancel返回false
 		 */
-		executor.submit(futuret);
+		/*executor.submit(futuret);
 		executor.shutdown();
 		System.out.println("线程刚刚启动，线程是否执行完成：" + futuret.isDone());
 		Thread.sleep(100);
 		System.out.println("线程执行以上睡眠时间后，取消线程：" + futuret.cancel(true));
 		System.out.println(futuret.isDone());
-		System.out.println(futuret.cancel(true));
+		System.out.println(futuret.cancel(true));*/
 		
 		
 		/**
@@ -101,6 +112,25 @@ class FTask implements Callable<Integer>{
 		}
 		
 		return sum;
+	}
+	
+}
+
+class TaskRun implements Runnable{
+	
+	private Integer sum = 0;
+	
+	@Override
+	public void run() {
+		for(int i = 0; i < 100; i++){
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("active" + i);
+			sum += i;
+		}
 	}
 	
 }
