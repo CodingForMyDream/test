@@ -26,25 +26,27 @@ public class CallableFutureTask {
 		 * 线程打印结果为0；得出结论：FutureTask(Runnable runnable, V result) 和 submit(Runnable task, T result)
 		 * 具有同样的效果，只定义result的类型，不能接受返回结果
 		 */
-		TaskRun tr = new TaskRun();
+		/*TaskRun tr = new TaskRun();
 		Integer result = 0;
 		FutureTask<Integer> futuret3 = new FutureTask<Integer>(tr, result);
 		executor.submit(futuret3);
 		executor.shutdown();
-		System.out.println("线程执行结果:" + result);
+		System.out.println("线程执行结果:" + result);*/
 		
 		/**
 		 * 1，线程执行cancel后不能调用get获取结果
 		 * 2，cancel param true立刻打断；false允许执行完成
 		 * 3，线程执行完毕后调用cancel返回false
+		 * 4，线程还没有开始，调用cancel，线程得不到执行；调用isDone返回true
 		 */
-		/*executor.submit(futuret);
+		System.out.println(futuret.cancel(true));
+		executor.submit(futuret);
 		executor.shutdown();
 		System.out.println("线程刚刚启动，线程是否执行完成：" + futuret.isDone());
 		Thread.sleep(100);
 		System.out.println("线程执行以上睡眠时间后，取消线程：" + futuret.cancel(true));
 		System.out.println(futuret.isDone());
-		System.out.println(futuret.cancel(true));*/
+		System.out.println(futuret.cancel(true));
 		
 		
 		/**
@@ -123,11 +125,11 @@ class TaskRun implements Runnable{
 	@Override
 	public void run() {
 		for(int i = 0; i < 100; i++){
-			try {
+			/*try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}*/
 			System.out.println("active" + i);
 			sum += i;
 		}
