@@ -1,0 +1,9 @@
+1，普通工厂类 SendFactory.java
+	首先创建工厂对象，根据参数动态创建对象，传入参数有误不能正确处理；
+2，静态工厂类 SendStaticFactory.java
+	工厂类中的方法定义为静态方法，不需要工厂实例；工厂类提供的不同方法获取不同的实例；
+3，反射工厂类 SendReflectFactory.java
+	根据传入参数，通过反射生成实例对象，工厂类的最少改动	
+4，抽象工厂类
+	所有工厂实现一个Provider接口，所有创建的工厂用Provider接收
+	Provider provider = new SendMailFactory();	
