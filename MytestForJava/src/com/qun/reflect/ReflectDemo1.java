@@ -1,5 +1,11 @@
 package com.qun.reflect;
 
+/**
+ * 
+ * 反射的三种实现
+ * @author 佳俊
+ *
+ */
 public class ReflectDemo1 {
 
 	public static void main(String[] args) {
