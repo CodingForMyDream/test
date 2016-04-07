@@ -7,3 +7,12 @@
 4，抽象工厂类
 	所有工厂实现一个Provider接口，所有创建的工厂用Provider接收
 	Provider provider = new SendMailFactory();	
+	
+	
+	
+桥接模式（Bridge）
+桥接模式具备和工厂模式类似的实现
+最典型的例子就是JDBC。JDBC API(Sun)提供抽象部分，各个JDBC驱动厂商(Oracle, Mysql...)提供实现部分。
+新的JDBC驱动可以“即插即用”在JDBC API中，而不需要修改我们调用者的代码。
+这就是所谓的抽象部分(JDBC API)与它的实现部分(JDBC Driver)分离。
+从宏观角度JDBC可以称为桥模式，但是从微观角度，JDBC中又使用了很多其他设计模式，比如工厂模式，策略模式等等
