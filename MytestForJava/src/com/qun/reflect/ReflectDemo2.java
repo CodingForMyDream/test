@@ -4,15 +4,19 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import com.qun.myAnnotation.Apple;
+
 /**
- * 通过反射获取类方法
+ * 通过反射获取类构造方法，方法，属性
  * @author 佳俊
  */
 public class ReflectDemo2 {
 
 	public static void main(String[] args) {
 		Integer s = 0;
-		ClassUtil.getClassConstructor(s);
+		Apple apple = new Apple(); 
+		ClassUtil.getClassField(apple);
+		System.out.println();
 	}
 }
 
@@ -60,7 +64,23 @@ class ClassUtil{
 		/**
 		 * c.getFields();	获取所有的public的成员变量
 		 * c.getDeclaredFields();	获取所有该类自己声明的成员变量
+		 * c.getDeclaredField(String name);	获取执行名称的类属性
 		 */
+		
+		try {
+			Field temp = c.getDeclaredField("appleName");
+			temp.setAccessible(true);
+			temp.set(obj, "banana");
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+		
 		Field[] fs = c.getDeclaredFields();
 		for(Field field : fs){
 			System.out.println(field.getType().getName() +" "+ field.getName());
